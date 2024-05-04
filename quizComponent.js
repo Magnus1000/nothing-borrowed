@@ -1,7 +1,7 @@
 // quizComponent.js
 const QuizComponent = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(1);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [currentQuestion, setCurrentQuestion] = React.useState(1);
+  const [selectedAnswer, setSelectedAnswer] = React.useState(null);
 
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer);
@@ -77,4 +77,4 @@ const QuizComponent = () => {
   );
 };
 
-ReactDOM.render(<QuizComponent />, document.getElementById('root'));
+ReactDOM.render(React.createElement(QuizComponent), document.getElementById('root'));
