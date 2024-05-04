@@ -1,30 +1,41 @@
 // quizComponent.js
 const QuizComponent = () => {
-  const [currentQuestion, setCurrentQuestion] = React.useState(1);
-  const [selectedAnswer, setSelectedAnswer] = React.useState(null);
+    const [currentQuestion, setCurrentQuestion] = React.useState(1);
+    const [selectedAnswer, setSelectedAnswer] = React.useState(null);
 
-  const handleAnswerClick = (answer) => {
-    setSelectedAnswer(answer);
-  };
+    const handleAnswerClick = (answer) => {
+        setSelectedAnswer(answer);
+        // Automatically go to the next question after selecting an answer
+        handleNextQuestion();
+    };
 
-  const handleNextQuestion = () => {
-    setCurrentQuestion(currentQuestion + 1);
-    setSelectedAnswer(null);
-  };
+    const handleNextQuestion = () => {
+        if (currentQuestion < 3) {
+        setCurrentQuestion(currentQuestion + 1);
+        }
+        setSelectedAnswer(null);
+    };
 
-  const renderOption = (option, imageUrl) => {
-    return (
-      <div
-        className={`quiz-option ${selectedAnswer === option ? 'selected' : ''}`}
-        onClick={() => handleAnswerClick(option)}
-      >
-        <img src={imageUrl} alt={`Option ${option}`} />
-        <div className="quiz-text-div">
-          <span className="quiz-text">{option}</span>
+    const handlePreviousQuestion = () => {
+        if (currentQuestion > 1) {
+        setCurrentQuestion(currentQuestion - 1);
+        }
+        setSelectedAnswer(null);
+    };
+
+    const renderOption = (option, imageUrl) => {
+        return (
+        <div
+            className={`quiz-option ${selectedAnswer === option ? 'selected' : ''}`}
+            onClick={() => handleAnswerClick(option)}
+        >
+            <img src={imageUrl} alt={`Option ${option}`} />
+            <div className="quiz-text-div">
+            <span className="quiz-text">{option}</span>
+            </div>
         </div>
-      </div>
-    );
-  };
+        );
+    };
 
   const questionData = [
     {
@@ -61,9 +72,9 @@ const QuizComponent = () => {
         <div className="quiz-options">
           {['A', 'B', 'C'].map((option, index) => renderOption(option, images[index]))}
         </div>
-        {selectedAnswer && (
-          <button className="next-button" onClick={handleNextQuestion}>
-            Next
+        {currentQuestion > 1 && (
+          <button className="back-button" onClick={handlePreviousQuestion}>
+            Back
           </button>
         )}
       </>
