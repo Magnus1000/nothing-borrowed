@@ -21,21 +21,21 @@ const QuizComponent = () => {
             className={`quiz-option ${selectedAnswer === 'A' ? 'selected' : ''}`}
             onClick={() => handleAnswerClick('A')}
           >
-            <img src="option-a.jpg" alt="Option A" />
+            <img src="https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66366541ae1ef0b5bb107114_testimonial-1.webp" alt="Option A" />
             <span>A</span>
           </div>
           <div
             className={`quiz-option ${selectedAnswer === 'B' ? 'selected' : ''}`}
             onClick={() => handleAnswerClick('B')}
           >
-            <img src="option-b.jpg" alt="Option B" />
+            <img src="https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66366541ae1ef0b5bb107114_testimonial-1.webp" alt="Option B" />
             <span>B</span>
           </div>
           <div
             className={`quiz-option ${selectedAnswer === 'C' ? 'selected' : ''}`}
             onClick={() => handleAnswerClick('C')}
           >
-            <img src="option-c.jpg" alt="Option C" />
+            <img src="https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66366541ae1ef0b5bb107114_testimonial-1.webp" alt="Option C" />
             <span>C</span>
           </div>
         </div>
@@ -57,21 +57,21 @@ const QuizComponent = () => {
             className={`quiz-option ${selectedAnswer === 'A' ? 'selected' : ''}`}
             onClick={() => handleAnswerClick('A')}
           >
-            <img src="email-a.jpg" alt="Option A" />
+            <img src="https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66366541ae1ef0b5bb107114_testimonial-1.webp" alt="Option A" />
             <span>A</span>
           </div>
           <div
             className={`quiz-option ${selectedAnswer === 'B' ? 'selected' : ''}`}
             onClick={() => handleAnswerClick('B')}
           >
-            <img src="email-b.jpg" alt="Option B" />
+            <img src="https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66366541ae1ef0b5bb107114_testimonial-1.webp" alt="Option B" />
             <span>B</span>
           </div>
           <div
             className={`quiz-option ${selectedAnswer === 'C' ? 'selected' : ''}`}
             onClick={() => handleAnswerClick('C')}
           >
-            <img src="email-c.jpg" alt="Option C" />
+            <img src="https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66366541ae1ef0b5bb107114_testimonial-1.webp" alt="Option C" />
             <span>C</span>
           </div>
         </div>
@@ -93,21 +93,21 @@ const QuizComponent = () => {
             className={`quiz-option ${selectedAnswer === 'A' ? 'selected' : ''}`}
             onClick={() => handleAnswerClick('A')}
           >
-            <img src="logo-a.jpg" alt="Option A" />
+            <img src="https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66366541ae1ef0b5bb107114_testimonial-1.webp" alt="Option A" />
             <span>A</span>
           </div>
           <div
             className={`quiz-option ${selectedAnswer === 'B' ? 'selected' : ''}`}
             onClick={() => handleAnswerClick('B')}
           >
-            <img src="logo-b.jpg" alt="Option B" />
+            <img src="https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66366541ae1ef0b5bb107114_testimonial-1.webp" alt="Option B" />
             <span>B</span>
           </div>
           <div
             className={`quiz-option ${selectedAnswer === 'C' ? 'selected' : ''}`}
             onClick={() => handleAnswerClick('C')}
           >
-            <img src="logo-c.jpg" alt="Option C" />
+            <img src="https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66366541ae1ef0b5bb107114_testimonial-1.webp" alt="Option C" />
             <span>C</span>
           </div>
         </div>
