@@ -3,6 +3,7 @@ const QuizComponent = () => {
     const [currentQuestion, setCurrentQuestion] = React.useState(1);
     const [selectedAnswer, setSelectedAnswer] = React.useState(null);
     const [correctAnswers, setCorrectAnswers] = React.useState(0);
+    const [showResultsModal, setShowResultsModal] = React.useState(false);
   
     const correctOptions = ['A', 'B', 'C']; // Example correct answers for each question
   
@@ -16,8 +17,8 @@ const QuizComponent = () => {
         }
         // If it's the last question, show results. Otherwise, go to the next question.
         if (currentQuestion === 3) {
-            console.log("Reached the last question, calling showResults()");
-            showResults();
+            console.log("Reached the last question, setting showResultsModal to true");
+            setShowResultsModal(true);
         } else {
             console.log("Moving to the next question");
             handleNextQuestion();
@@ -61,7 +62,11 @@ const QuizComponent = () => {
             <img className="softserve-image" src='https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp'></img>
             <div className="quiz-results-modal">
                 <h2 className="result-text">{resultText}</h2>
-                <button onClick={() => setCurrentQuestion(1)}>Restart Quiz</button>
+                <button onClick={() => {
+                    setCurrentQuestion(1);
+                    setShowResultsModal(false);
+                    }}>Restart Quiz
+                </button>
             </div>
             </div>
         );
@@ -109,7 +114,10 @@ const QuizComponent = () => {
     ];
 
     const renderQuestion = () => {
-        if (currentQuestion <= 3) {
+        if (showResultsModal) {
+          console.log("Rendering the results modal");
+          return showResults();
+        } else if (currentQuestion <= 3) {
           console.log(`Rendering question ${currentQuestion}`);
           const { question, images } = questionData[currentQuestion - 1];
           return (
@@ -125,9 +133,6 @@ const QuizComponent = () => {
               )}
             </>
           );
-        } else {
-          console.log("All questions answered, rendering results");
-          return showResults();
         }
     };
     
