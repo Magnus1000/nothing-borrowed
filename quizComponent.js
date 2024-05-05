@@ -135,7 +135,7 @@ const QuizComponent = ({ onQuizComplete }) => {
     };
   
     return (
-      <div>
+      <div className='quiz-modal-wrapper'>
         {quizCompleted ? (
           <ResultsComponent correctAnswers={correctAnswers} onRestart={handleRestart} />
         ) : (
