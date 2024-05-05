@@ -7,19 +7,21 @@ const QuizComponent = () => {
     const correctOptions = ['A', 'B', 'C']; // Example correct answers for each question
   
     const handleAnswerClick = (answer, index) => {
-    setSelectedAnswer(answer);
-    if (answer === correctOptions[index]) {
-        setCorrectAnswers(correctAnswers + 1);
-        console.log(`Correct answer! Current score: ${correctAnswers + 1}`);
-    } else {
-        console.log(`Incorrect answer. Current score: ${correctAnswers}`);
-    }
-    // If it's the last question, show results. Otherwise, go to the next question.
-    if (currentQuestion === 3) {
-        showResults();
-    } else {
-        handleNextQuestion();
-    }
+        setSelectedAnswer(answer);
+        if (answer === correctOptions[index]) {
+            setCorrectAnswers(correctAnswers + 1);
+            console.log(`Correct answer! Current score: ${correctAnswers + 1}`);
+        } else {
+            console.log(`Incorrect answer. Current score: ${correctAnswers}`);
+        }
+        // If it's the last question, show results. Otherwise, go to the next question.
+        if (currentQuestion === 3) {
+            console.log("Reached the last question, calling showResults()");
+            showResults();
+        } else {
+            console.log("Moving to the next question");
+            handleNextQuestion();
+        }
     };
   
     const handleNextQuestion = () => {
@@ -38,30 +40,31 @@ const QuizComponent = () => {
       }
       setSelectedAnswer(null);
     };
-  
+        
     const showResults = () => {
-      const scorePercentage = (correctAnswers / 3) * 100;
-      let resultImage, resultText;
-      if (scorePercentage === 100) {
-        resultImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp';
-        resultText = "You scored 100%! We’re on the same page. Time to Book An appointment. Great design Isn’t Free Though. I charge $200 for the Initial Consultation.";
-      } else if (scorePercentage >= 66) {
-        resultImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp';
-        resultText = "You scored 66%. Not bad, but let's try to improve!";
-      } else {
-        resultImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp';
-        resultText = "You scored 33% or less. We might need to revisit some basics.";
-      }
-  
-      return (
-        <div className="results-component">
+        console.log("Rendering the results modal");
+        const scorePercentage = (correctAnswers / 3) * 100;
+        let resultImage, resultText;
+        if (scorePercentage === 100) {
+            resultImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp';
+            resultText = "You scored 100%! We're on the same page. Time to Book An appointment. Great design Isn't Free Though. I charge $200 for the Initial Consultation.";
+        } else if (scorePercentage >= 66) {
+            resultImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp';
+            resultText = "You scored 66%. Not bad, but let's try to improve!";
+        } else {
+            resultImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp';
+            resultText = "You scored 33% or less. We might need to revisit some basics.";
+        }
+        
+        return (
+            <div className="results-component">
             <img className="softserve-image" src='https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp'></img>
             <div className="quiz-results-modal">
                 <h2 className="result-text">{resultText}</h2>
                 <button onClick={() => setCurrentQuestion(1)}>Restart Quiz</button>
             </div>
-        </div>
-      );
+            </div>
+        );
     };
   
     const renderOption = (option, imageUrl, index) => {
@@ -107,6 +110,7 @@ const QuizComponent = () => {
 
     const renderQuestion = () => {
         if (currentQuestion <= 3) {
+          console.log(`Rendering question ${currentQuestion}`);
           const { question, images } = questionData[currentQuestion - 1];
           return (
             <>
@@ -122,15 +126,16 @@ const QuizComponent = () => {
             </>
           );
         } else {
+          console.log("All questions answered, rendering results");
           return showResults();
         }
-      };
+    };
     
-      return (
+    return (
         <div className="quiz-component">
-          {renderQuestion()}
+            {renderQuestion()}
         </div>
-      );
+    );
 };
     
 ReactDOM.render(React.createElement(QuizComponent), document.getElementById('root'));
