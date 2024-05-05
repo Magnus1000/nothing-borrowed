@@ -7,15 +7,19 @@ const QuizComponent = () => {
     const correctOptions = ['A', 'B', 'C']; // Example correct answers for each question
   
     const handleAnswerClick = (answer, index) => {
-        setSelectedAnswer(answer);
-        if (answer === correctOptions[index]) {
-          setCorrectAnswers(correctAnswers + 1);
-          console.log(`Correct answer! Current score: ${correctAnswers + 1}`);
-        } else {
-          console.log(`Incorrect answer. Current score: ${correctAnswers}`);
-        }
-        // Automatically go to the next question after selecting an answer
+    setSelectedAnswer(answer);
+    if (answer === correctOptions[index]) {
+        setCorrectAnswers(correctAnswers + 1);
+        console.log(`Correct answer! Current score: ${correctAnswers + 1}`);
+    } else {
+        console.log(`Incorrect answer. Current score: ${correctAnswers}`);
+    }
+    // If it's the last question, show results. Otherwise, go to the next question.
+    if (currentQuestion === 3) {
+        showResults();
+    } else {
         handleNextQuestion();
+    }
     };
   
     const handleNextQuestion = () => {
