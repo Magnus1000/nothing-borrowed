@@ -102,9 +102,9 @@ const QuizComponent = ({ onQuizComplete }) => {
     const scorePercentage = (correctAnswers / 3) * 100;
     let resultText;
     if (scorePercentage === 100) {
-      resultText = "You scored 100%! We're on the same page. Time to Book An appointment. Great design Isn't Free Though. I charge $200 for the Initial Consultation.";
+      resultText = "Looks like we're on the same page. Book an Appointment!";
     } else if (scorePercentage >= 66) {
-      resultText = "You scored 66%. Not bad, but let's try to improve!";
+      resultText = "You scored 66%. Forward this to your significant other to see if they have better luck.";
     } else {
       resultText = "You scored 33% or less. We might need to revisit some basics.";
     }
@@ -113,8 +113,14 @@ const QuizComponent = ({ onQuizComplete }) => {
       <div className="results-component">
         <img className="softserve-image" src='https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp'></img>
         <div className="quiz-results-modal">
-          <h2 className="result-text">{resultText}</h2>
-          <button onClick={onRestart}>Restart Quiz</button>
+            <div className="quiz-modal-header-wrapper">
+                <h2 className="quiz-modal-text-h2">"Your Score"</h2>
+                <h2 className="quiz-modal-score-h2">{scorePercentage}</h2>
+            </div>
+            <div className="quiz-modal-body">
+                <p className="quiz-modal-text">{resultText}</p>
+            </div>
+            <button className="quiz-modal-button" onClick={onRestart}>Restart Quiz</button>
         </div>
       </div>
     );
