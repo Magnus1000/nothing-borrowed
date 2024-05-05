@@ -50,9 +50,12 @@ const QuizComponent = () => {
       }
   
       return (
-        <div style={{ background: `url(${resultImage})`, color: 'white', textAlign: 'center', padding: '20px' }}>
-          <h2>{resultText}</h2>
-          <button onClick={() => setCurrentQuestion(1)}>Restart Quiz</button>
+        <div className="results-component">
+            <img className="softserve-image" src='https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp'></img>
+            <div className="quiz-results-modal">
+                <h2 className="result-text">{resultText}</h2>
+                <button onClick={() => setCurrentQuestion(1)}>Restart Quiz</button>
+            </div>
         </div>
       );
     };
