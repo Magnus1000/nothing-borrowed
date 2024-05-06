@@ -53,7 +53,6 @@ const QuizComponent = ({ onQuizComplete }) => {
     const renderOption = (option, imageUrl, index) => {
         const isCorrect = selectedAnswer === option && option === correctOptions[index];
         return (
-          <div className="quiz-option-wrapper">
             <div
               className={`quiz-option ${selectedAnswer === option ? 'selected' : ''}`}
               onClick={() => handleAnswerClick(option, index)}
@@ -62,13 +61,12 @@ const QuizComponent = ({ onQuizComplete }) => {
               <div className="quiz-text-div">
                 <span className="quiz-text">{option}</span>
               </div>
+              {showOverlay && selectedAnswer === option && (
+                <div className={`quiz-option-overlay ${isCorrect ? 'correct' : 'incorrect'}`}>
+                    <span>{isCorrect ? 'Correct' : 'Incorrect'}</span>
+                </div>
+                )}
             </div>
-            {showOverlay && selectedAnswer === option && (
-              <div className={`quiz-option-overlay ${isCorrect ? 'correct' : 'incorrect'}`}>
-                <span>{isCorrect ? 'Correct' : 'Incorrect'}</span>
-              </div>
-            )}
-          </div>
         );
     };
   
