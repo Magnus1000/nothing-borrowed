@@ -129,7 +129,7 @@ const QuizComponent = ({ onQuizComplete }) => {
   
     return (
       <div className={`results-component ${transitionClass}`}>
-        <img className="softserve-image" src='https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp'></img>
+        <img className="softserve-image" src='https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/6638fa3ca47b2a9d5e9eaad0_softserve-wide-desktop.webp'></img>
         <div className="quiz-results-modal">
             <div className="quiz-modal-header-wrapper">
                 <h2 className="quiz-modal-text-h2">Your Score</h2>
