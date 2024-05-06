@@ -4,6 +4,7 @@ const QuizComponent = ({ onQuizComplete }) => {
     const [selectedAnswer, setSelectedAnswer] = React.useState(null);
     const [correctAnswers, setCorrectAnswers] = React.useState(0);
     const [transitionClass, setTransitionClass] = React.useState('fade-in');
+    const [showOverlay, setShowOverlay] = React.useState(false);
   
     const correctOptions = ['C', 'B', 'C']; 
   
@@ -16,18 +17,22 @@ const QuizComponent = ({ onQuizComplete }) => {
           console.log(`Incorrect answer. Current score: ${correctAnswers}`);
         }
       
-        setTransitionClass('');
+        setShowOverlay(true);
         setTimeout(() => {
-          setTransitionClass('fade-out');
+          setShowOverlay(false);
+          setTransitionClass('');
           setTimeout(() => {
-            setTransitionClass('fade-in');
-            if (currentQuestion === 3) {
-              onQuizComplete(correctAnswers);
-            } else {
-              handleNextQuestion();
-            }
-          }, 500);
-        }, 0);
+            setTransitionClass('fade-out');
+            setTimeout(() => {
+              setTransitionClass('fade-in');
+              if (currentQuestion === 3) {
+                onQuizComplete(correctAnswers);
+              } else {
+                handleNextQuestion();
+              }
+            }, 500);
+          }, 0);
+        }, 1000);
     };
   
     const handleNextQuestion = () => {
@@ -46,17 +51,25 @@ const QuizComponent = ({ onQuizComplete }) => {
     };
   
     const renderOption = (option, imageUrl, index) => {
-      return (
-        <div
-          className={`quiz-option ${selectedAnswer === option ? 'selected' : ''}`}
-          onClick={() => handleAnswerClick(option, index)}
-        >
-          <img src={imageUrl} alt={`Option ${option}`} />
-          <div className="quiz-text-div">
-            <span className="quiz-text">{option}</span>
+        const isCorrect = selectedAnswer === option && option === correctOptions[index];
+        return (
+          <div className="quiz-option-wrapper">
+            <div
+              className={`quiz-option ${selectedAnswer === option ? 'selected' : ''}`}
+              onClick={() => handleAnswerClick(option, index)}
+            >
+              <img src={imageUrl} alt={`Option ${option}`} />
+              <div className="quiz-text-div">
+                <span className="quiz-text">{option}</span>
+              </div>
+            </div>
+            {showOverlay && selectedAnswer === option && (
+              <div className={`quiz-option-overlay ${isCorrect ? 'correct' : 'incorrect'}`}>
+                <span>{isCorrect ? 'Correct' : 'Incorrect'}</span>
+              </div>
+            )}
           </div>
-        </div>
-      );
+        );
     };
   
     const questionData = [
