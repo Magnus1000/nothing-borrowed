@@ -3,6 +3,7 @@ const QuizComponent = ({ onQuizComplete }) => {
     const [currentQuestion, setCurrentQuestion] = React.useState(1);
     const [selectedAnswer, setSelectedAnswer] = React.useState(null);
     const [correctAnswers, setCorrectAnswers] = React.useState(0);
+    const [transitionClass, setTransitionClass] = React.useState('');
   
     const correctOptions = ['C', 'B', 'C']; 
   
@@ -22,6 +23,16 @@ const QuizComponent = ({ onQuizComplete }) => {
         console.log("Moving to the next question");
         handleNextQuestion();
       }
+
+      setTransitionClass('fade-out');
+      setTimeout(() => {
+        setTransitionClass('fade-in');
+        if (currentQuestion === 3) {
+          onQuizComplete(correctAnswers);
+        } else {
+          handleNextQuestion();
+        }
+      }, 5000);
     };
   
     const handleNextQuestion = () => {
@@ -83,17 +94,17 @@ const QuizComponent = ({ onQuizComplete }) => {
     console.log(`Rendering question ${currentQuestion}`);
     const { question, images } = questionData[currentQuestion - 1];
     return (
-    <div className={`quiz-component fade-in`}>
-        <h2 className="quiz-heading">{`Q${currentQuestion}/3 ${question}`}</h2>
-        <div className="quiz-options">
-        {['A', 'B', 'C'].map((option, index) => renderOption(option, images[index], currentQuestion - 1))}
+        <div className={`quiz-component ${transitionClass}`}>
+            <h2 className="quiz-heading">{`Q${currentQuestion}/3 ${question}`}</h2>
+            <div className="quiz-options">
+            {['A', 'B', 'C'].map((option, index) => renderOption(option, images[index], currentQuestion - 1))}
+            </div>
+            {currentQuestion > 1 && (
+            <button className="back-button" onClick={handlePreviousQuestion}>
+                Back
+            </button>
+            )}
         </div>
-        {currentQuestion > 1 && (
-        <button className="back-button" onClick={handlePreviousQuestion}>
-            Back
-        </button>
-        )}
-    </div>
     );
   };
   
