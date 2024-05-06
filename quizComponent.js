@@ -3,36 +3,31 @@ const QuizComponent = ({ onQuizComplete }) => {
     const [currentQuestion, setCurrentQuestion] = React.useState(1);
     const [selectedAnswer, setSelectedAnswer] = React.useState(null);
     const [correctAnswers, setCorrectAnswers] = React.useState(0);
-    const [transitionClass, setTransitionClass] = React.useState('');
+    const [transitionClass, setTransitionClass] = React.useState('fade-in');
   
     const correctOptions = ['C', 'B', 'C']; 
   
     const handleAnswerClick = (answer, index) => {
-      setSelectedAnswer(answer);
-      if (answer === correctOptions[index]) {
-        setCorrectAnswers(correctAnswers + 1);
-        console.log(`Correct answer! Current score: ${correctAnswers + 1}`);
-      } else {
-        console.log(`Incorrect answer. Current score: ${correctAnswers}`);
-      }
-      // If it's the last question, notify the parent component. Otherwise, go to the next question.
-      if (currentQuestion === 3) {
-        console.log("Reached the last question, notifying parent component");
-        onQuizComplete(correctAnswers);
-      } else {
-        console.log("Moving to the next question");
-        handleNextQuestion();
-      }
-
-      setTransitionClass('fade-out');
-      setTimeout(() => {
-        setTransitionClass('fade-in');
-        if (currentQuestion === 3) {
-          onQuizComplete(correctAnswers);
+        setSelectedAnswer(answer);
+        if (answer === correctOptions[index]) {
+          setCorrectAnswers(correctAnswers + 1);
+          console.log(`Correct answer! Current score: ${correctAnswers + 1}`);
         } else {
-          handleNextQuestion();
+          console.log(`Incorrect answer. Current score: ${correctAnswers}`);
         }
-      }, 500);
+      
+        setTransitionClass('');
+        setTimeout(() => {
+          setTransitionClass('fade-out');
+          setTimeout(() => {
+            setTransitionClass('fade-in');
+            if (currentQuestion === 3) {
+              onQuizComplete(correctAnswers);
+            } else {
+              handleNextQuestion();
+            }
+          }, 500);
+        }, 0);
     };
   
     const handleNextQuestion = () => {
