@@ -4,7 +4,7 @@ const QuizComponent = ({ onQuizComplete }) => {
     const [selectedAnswer, setSelectedAnswer] = React.useState(null);
     const [correctAnswers, setCorrectAnswers] = React.useState(0);
   
-    const correctOptions = ['A', 'B', 'C']; // Example correct answers for each question
+    const correctOptions = ['C', 'B', 'C']; 
   
     const handleAnswerClick = (answer, index) => {
       setSelectedAnswer(answer);
@@ -57,25 +57,25 @@ const QuizComponent = ({ onQuizComplete }) => {
       {
         question: "Which website is custom crafted?",
         images: [
-          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp", // Placeholder URL for Option A
-          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp", // Placeholder URL for Option B
+          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66380ae705dd6f705165b588_template-website-2%402x.jpg", // Placeholder URL for Option A
+          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66380ae7346c5153165a39d5_template-website-1%402x.jpg", // Placeholder URL for Option B
           "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp"  // Placeholder URL for Option C
         ]
       },
       {
         question: "Which email is custom crafted?",
         images: [
-          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp", // Placeholder URL for Option A
-          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp", // Placeholder URL for Option B
+          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663820874a22983c6cad3aae_email-template-1%402x.webp", // Placeholder URL for Option A
+          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/6638205c37373f35e02d9f93_email-template-2%402x.webp", // Placeholder URL for Option B
           "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp"  // Placeholder URL for Option C
         ]
       },
       {
         question: "Which wedding website logo is unique?",
         images: [
-          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp", // Placeholder URL for Option A
-          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp", // Placeholder URL for Option B
-          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp"  // Placeholder URL for Option C
+          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663814ed0ef3b41c61da9914_with-joy-logo%402x.webp", // Placeholder URL for Option A
+          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663814ed562959792a8df56c_the-knot-logo%402x.webp", // Placeholder URL for Option B
+          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663814ed25f89d97f206612e_the-edwards%402x.webp"  // Placeholder URL for Option C
         ]
       }
     ];
@@ -100,6 +100,7 @@ const QuizComponent = ({ onQuizComplete }) => {
   const ResultsComponent = ({ correctAnswers, onRestart }) => {
     console.log("Rendering the results component");
     const scorePercentage = (correctAnswers / 3) * 100;
+    const scorePercentageRounded = Math.round(scorePercentage);
     let resultText;
     if (scorePercentage === 100) {
       resultText = "Looks like we're on the same page. Book an Appointment!";
@@ -114,8 +115,8 @@ const QuizComponent = ({ onQuizComplete }) => {
         <img className="softserve-image" src='https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/66368828881b32d5e5d364d0_softserve.webp'></img>
         <div className="quiz-results-modal">
             <div className="quiz-modal-header-wrapper">
-                <h2 className="quiz-modal-text-h2">"Your Score"</h2>
-                <h2 className="quiz-modal-score-h2">{scorePercentage}</h2>
+                <h2 className="quiz-modal-text-h2">Your Score</h2>
+                <h2 className="quiz-modal-score-h2">{scorePercentageRounded}</h2>
             </div>
             <div className="quiz-modal-body">
                 <p className="quiz-modal-text">{resultText}</p>
