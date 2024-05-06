@@ -83,17 +83,17 @@ const QuizComponent = ({ onQuizComplete }) => {
     console.log(`Rendering question ${currentQuestion}`);
     const { question, images } = questionData[currentQuestion - 1];
     return (
-      <div className="quiz-component">
+    <div className={`quiz-component fade-in`}>
         <h2 className="quiz-heading">{`Q${currentQuestion}/3 ${question}`}</h2>
         <div className="quiz-options">
-          {['A', 'B', 'C'].map((option, index) => renderOption(option, images[index], currentQuestion - 1))}
+        {['A', 'B', 'C'].map((option, index) => renderOption(option, images[index], currentQuestion - 1))}
         </div>
         {currentQuestion > 1 && (
-          <button className="back-button" onClick={handlePreviousQuestion}>
+        <button className="back-button" onClick={handlePreviousQuestion}>
             Back
-          </button>
+        </button>
         )}
-      </div>
+    </div>
     );
   };
   
