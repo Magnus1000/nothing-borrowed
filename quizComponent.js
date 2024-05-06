@@ -117,7 +117,7 @@ const QuizComponent = ({ onQuizComplete }) => {
 
     console.log("Rendering the results component");
     const scorePercentage = (correctAnswers / 3) * 100;
-    const scorePercentageRounded = Math.round(scorePercentage);
+    const scorePercentageRounded = Math.round(scorePercentage); 
     let resultText;
     if (scorePercentage === 100) {
       resultText = "Looks like we're on the same page. Book an Appointment!";
