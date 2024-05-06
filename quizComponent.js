@@ -101,7 +101,10 @@ const QuizComponent = ({ onQuizComplete }) => {
     const { question, images } = questionData[currentQuestion - 1];
     return (
         <div className={`quiz-component ${transitionClass}`}>
-            <h2 className="quiz-heading">{`Q${currentQuestion}/3 ${question}`}</h2>
+            <h2 className="quiz-heading">
+            <span className="quiz-question-number">{`Q${currentQuestion}/3`}</span> 
+            {question}
+            </h2>
             <div className="quiz-options">
             {['A', 'B', 'C'].map((option, index) => renderOption(option, images[index], currentQuestion - 1))}
             </div>
@@ -122,7 +125,7 @@ const QuizComponent = ({ onQuizComplete }) => {
     }, []);
 
     console.log("Rendering the results component");
-    const scorePercentage = (correctAnswers / 3) * 100;
+    const scorePercentage = Math.round((correctAnswers / 3) * 100);
     const scorePercentageRounded = Math.round(scorePercentage); 
     let resultText;
     if (scorePercentage === 100) {
@@ -139,7 +142,7 @@ const QuizComponent = ({ onQuizComplete }) => {
         <div className="quiz-results-modal">
             <div className="quiz-modal-header-wrapper">
                 <h2 className="quiz-modal-text-h2">Your Score</h2>
-                <h2 className="quiz-modal-score-h2">{scorePercentageRounded}</h2>
+                <h2 className="quiz-modal-score-h2">{scorePercentageRounded}%</h2>
             </div>
             <div className="quiz-modal-body">
                 <p className="quiz-modal-text">{resultText}</p>
