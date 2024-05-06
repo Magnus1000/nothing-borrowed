@@ -32,7 +32,7 @@ const QuizComponent = ({ onQuizComplete }) => {
               }
             }, 500);
           }, 0);
-        }, 60000);
+        }, 1000);
     };
   
     const handleNextQuestion = () => {
