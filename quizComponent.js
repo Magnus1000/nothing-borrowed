@@ -123,65 +123,71 @@ const QuizComponent = ({ onQuizComplete }) => {
     );
 };
   
-  const ResultsComponent = ({ correctAnswers, onRestart }) => {
-    const [transitionClass, setTransitionClass] = React.useState('');
+const ResultsComponent = ({ correctAnswers, onRestart }) => {
+  const [transitionClass, setTransitionClass] = React.useState('');
 
-    React.useEffect(() => {
-        setTransitionClass('slide-in');
-    }, []);
+  React.useEffect(() => {
+    setTransitionClass('slide-in');
+  }, []);
 
-    console.log("Rendering the results component");
-    const scorePercentage = Math.round((correctAnswers / 3) * 100);
-    const scorePercentageRounded = Math.round(scorePercentage); 
-    let resultText;
-    if (scorePercentage === 100) {
-      resultText = "Looks like we're on the same page. Book an Appointment!";
-    } else if (scorePercentage >= 66) {
+  console.log("Rendering the results component");
+  const scorePercentage = Math.round((correctAnswers / 3) * 100);
+  const scorePercentageRounded = Math.round(scorePercentage);
+  let resultText;
+  let softserveImage;
+
+  if (scorePercentage === 100) {
+    resultText = "Looks like we're on the same page. Book an Appointment!";
+    softserveImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/6638fa3ca47b2a9d5e9eaad0_softserve-wide-desktop.webp';
+  } else {
+    if (scorePercentage >= 66) {
       resultText = "You scored 66%. Forward this to your significant other to see if they have better luck.";
     } else {
       resultText = "You scored 33% or less. We might need to revisit some basics.";
     }
-  
-    return (
-      <div className={`results-component ${transitionClass}`}>
-        <img className="softserve-image" src='https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/6638fa3ca47b2a9d5e9eaad0_softserve-wide-desktop.webp'></img>
-        <div className="quiz-results-modal">
-            <div className="quiz-modal-header-wrapper">
-                <h2 className="quiz-modal-text-h2">Your Score</h2>
-                <h2 className="quiz-modal-score-h2">{scorePercentageRounded}%</h2>
-            </div>
-            <div className="quiz-modal-body">
-                <p className="quiz-modal-text">{resultText}</p>
-            </div>
-            <button className="quiz-modal-button" onClick={onRestart}>Restart Quiz</button>
+    softserveImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663ba2ec5743e5a00224c326_softserve-melting.png';
+  }
+
+  return (
+    <div className={`results-component ${transitionClass}`}>
+      <img className="softserve-image" src={softserveImage} alt="Softserve" />
+      <div className="quiz-results-modal">
+        <div className="quiz-modal-header-wrapper">
+          <h2 className="quiz-modal-text-h2">Your Score</h2>
+          <h2 className="quiz-modal-score-h2">{scorePercentageRounded}%</h2>
         </div>
+        <div className="quiz-modal-body">
+          <p className="quiz-modal-text">{resultText}</p>
+        </div>
+        <button className="quiz-modal-button" onClick={onRestart}>Restart Quiz</button>
       </div>
-    );
+    </div>
+  );
+};
+  
+const App = () => {
+  const [quizCompleted, setQuizCompleted] = React.useState(false);
+  const [correctAnswers, setCorrectAnswers] = React.useState(0);
+
+  const handleQuizComplete = (score) => {
+    setCorrectAnswers(score);
+    setQuizCompleted(true);
   };
-  
-  const App = () => {
-    const [quizCompleted, setQuizCompleted] = React.useState(false);
-    const [correctAnswers, setCorrectAnswers] = React.useState(0);
-  
-    const handleQuizComplete = (score) => {
-      setCorrectAnswers(score);
-      setQuizCompleted(true);
-    };
-  
-    const handleRestart = () => {
-      setQuizCompleted(false);
-      setCorrectAnswers(0);
-    };
-  
-    return (
-      <div className='quiz-modal-wrapper'>
-        {quizCompleted ? (
-          <ResultsComponent correctAnswers={correctAnswers} onRestart={handleRestart} />
-        ) : (
-          <QuizComponent onQuizComplete={handleQuizComplete} />
-        )}
-      </div>
-    );
+
+  const handleRestart = () => {
+    setQuizCompleted(false);
+    setCorrectAnswers(0);
   };
-  
-  ReactDOM.render(React.createElement(App), document.getElementById('root'));
+
+  return (
+    <div className='quiz-modal-wrapper'>
+      {quizCompleted ? (
+        <ResultsComponent correctAnswers={correctAnswers} onRestart={handleRestart} />
+      ) : (
+        <QuizComponent onQuizComplete={handleQuizComplete} />
+      )}
+    </div>
+  );
+};
+
+ReactDOM.render(React.createElement(App), document.getElementById('root'));
