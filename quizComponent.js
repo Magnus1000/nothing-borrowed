@@ -1,53 +1,58 @@
 // quizComponent.js
 const QuizComponent = ({ onQuizComplete }) => {
     const [currentQuestion, setCurrentQuestion] = React.useState(1);
-    const [selectedAnswer, setSelectedAnswer] = React.useState(null);
+    const [selectedAnswers, setSelectedAnswers] = React.useState([null, null, null]);
     const [correctAnswers, setCorrectAnswers] = React.useState(0);
     const [transitionClass, setTransitionClass] = React.useState('fade-in');
     const [showOverlay, setShowOverlay] = React.useState(false);
-  
+
     const correctOptions = ['C', 'B', 'C']; 
-  
+
     const handleAnswerClick = (answer, index) => {
-        setSelectedAnswer(answer);
-        if (answer === correctOptions[index]) {
-          setCorrectAnswers(correctAnswers + 1);
-          console.log(`Correct answer! Current score: ${correctAnswers + 1}`);
-        } else {
-          console.log(`Incorrect answer. Current score: ${correctAnswers}`);
-        }
-      
-        setShowOverlay(true);
+      const updatedAnswers = [...selectedAnswers];
+      updatedAnswers[index] = answer;
+      setSelectedAnswers(updatedAnswers);
+
+      if (answer === correctOptions[index]) {
+        setCorrectAnswers(correctAnswers + 1);
+        console.log(`Correct answer! Current score: ${correctAnswers + 1}`);
+      } else {
+        setCorrectAnswers(correctAnswers);
+        console.log(`Incorrect answer. Current score: ${correctAnswers}`);
+      }
+
+      setShowOverlay(true);
+      setTimeout(() => {
+        setShowOverlay(false);
+        setTransitionClass('');
         setTimeout(() => {
-          setShowOverlay(false);
-          setTransitionClass('');
+          setTransitionClass('fade-out');
           setTimeout(() => {
-            setTransitionClass('fade-out');
-            setTimeout(() => {
-              setTransitionClass('fade-in');
-              if (currentQuestion === 3) {
-                onQuizComplete(correctAnswers);
-              } else {
-                handleNextQuestion();
-              }
-            }, 500);
-          }, 0);
-        }, 1000);
+            setTransitionClass('fade-in');
+            if (currentQuestion === 3) {
+              onQuizComplete(updatedAnswers.filter((answer, i) => answer === correctOptions[i]).length);
+            } else {
+              handleNextQuestion();
+            }
+          }, 500);
+        }, 0);
+      }, 1000);
     };
-  
+
     const handleNextQuestion = () => {
       if (currentQuestion < 3) {
         setCurrentQuestion(currentQuestion + 1);
       }
-      setSelectedAnswer(null);
     };
-  
+
     const handlePreviousQuestion = () => {
       if (currentQuestion > 1) {
         setCurrentQuestion(currentQuestion - 1);
-        // Optionally adjust score if going back to change answers
+        const updatedAnswers = [...selectedAnswers];
+        updatedAnswers[currentQuestion - 1] = null;
+        setSelectedAnswers(updatedAnswers);
+        setCorrectAnswers(updatedAnswers.filter((answer, i) => answer === correctOptions[i]).length);
       }
-      setSelectedAnswer(null);
     };
   
     const renderOption = (option, imageUrl, index) => {
@@ -100,22 +105,22 @@ const QuizComponent = ({ onQuizComplete }) => {
     console.log(`Rendering question ${currentQuestion}`);
     const { question, images } = questionData[currentQuestion - 1];
     return (
-        <div className={`quiz-component ${transitionClass}`}>
-            <h2 className="quiz-heading">
-            <span className="quiz-question-number">{`Q${currentQuestion}/3`}</span> 
-            {question}
-            </h2>
-            <div className="quiz-options">
+      <div className={`quiz-component ${transitionClass}`}>
+          <h2 className="quiz-heading">
+          <span className="quiz-question-number">{`Q${currentQuestion}/3`}</span> 
+          {question}
+          </h2>
+          <div className="quiz-options">
             {['A', 'B', 'C'].map((option, index) => renderOption(option, images[index], currentQuestion - 1))}
-            </div>
-            {currentQuestion > 1 && (
+          </div>
+          {currentQuestion > 1 && (
             <button className="back-button" onClick={handlePreviousQuestion}>
-                Back
+              Back
             </button>
-            )}
-        </div>
+          )}
+      </div>
     );
-  };
+};
   
   const ResultsComponent = ({ correctAnswers, onRestart }) => {
     const [transitionClass, setTransitionClass] = React.useState('');
