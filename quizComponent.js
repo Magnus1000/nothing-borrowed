@@ -135,10 +135,16 @@ const ResultsComponent = ({ correctAnswers, onRestart }) => {
   const scorePercentageRounded = Math.round(scorePercentage);
   let resultText;
   let softserveImage;
+  let buttonText;
+  let buttonClass;
+  let buttonLink;
 
   if (scorePercentage === 100) {
     resultText = "Looks like we're on the same page. Book an Appointment!";
     softserveImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/6638fa3ca47b2a9d5e9eaad0_softserve-wide-desktop.webp';
+    buttonText = "Book Appointment";
+    buttonClass = "button-primary";
+    buttonLink = "/checkout";
   } else {
     if (scorePercentage >= 66) {
       resultText = "You scored 66%. Forward this to your significant other to see if they have better luck.";
@@ -146,7 +152,18 @@ const ResultsComponent = ({ correctAnswers, onRestart }) => {
       resultText = "You scored 33% or less. We might need to revisit some basics.";
     }
     softserveImage = 'https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663ba2ec5743e5a00224c326_softserve-melting.png';
+    buttonText = "Restart Quiz";
+    buttonClass = "button-secondary";
+    buttonLink = null;
   }
+
+  const handleButtonClick = () => {
+    if (buttonLink) {
+      window.location.href = buttonLink;
+    } else {
+      onRestart();
+    }
+  };
 
   return (
     <div className={`results-component ${transitionClass}`}>
@@ -159,7 +176,9 @@ const ResultsComponent = ({ correctAnswers, onRestart }) => {
         <div className="quiz-modal-body">
           <p className="quiz-modal-text">{resultText}</p>
         </div>
-        <button className="quiz-modal-button" onClick={onRestart}>Restart Quiz</button>
+        <button className={buttonClass} onClick={handleButtonClick}>
+          {buttonText}
+        </button>
       </div>
     </div>
   );
