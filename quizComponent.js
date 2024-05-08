@@ -90,7 +90,7 @@ const QuizComponent = ({ onQuizComplete }) => {
         images: [
           "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663820874a22983c6cad3aae_email-template-1%402x.webp", // Placeholder URL for Option A
           "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/6638205c37373f35e02d9f93_email-template-2%402x.webp", // Placeholder URL for Option B
-          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663679822490f284347b2515_quiz-website%402x.webp"  // Placeholder URL for Option C
+          "https://uploads-ssl.webflow.com/662ac33e8d40424730b1f55d/663bf8964daffe8f58503261_email-template-3%402x.webp"  // Placeholder URL for Option C
         ]
       },
       {
