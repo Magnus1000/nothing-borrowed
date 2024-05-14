@@ -1,5 +1,5 @@
 function sendPageViewEvent(url) {
-    const endpoint = 'https://locksmithlookup-magnus1000team.vercel.app/api/createAirtableEvent';
+    const endpoint = 'https://locksmithlookup-magnus1000team.vercel.app/api/jophiemcdoliffUserEvents';
     
     const data = {
       event: 'Page View',
