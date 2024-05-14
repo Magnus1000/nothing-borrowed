@@ -28,7 +28,7 @@ function sendPageViewEvent(url, userId) {
 // Function to fetch the current page URL and send the page view event
 function sendCurrentPageViewEvent() {
   const currentUrl = new URL(window.location.href);
-  let userId = currentUrl.searchParams.get('userId');
+  let userId = currentUrl.search.slice(1); // Remove the "?" and get the user ID
 
   if (userId) {
     localStorage.setItem('userId', userId);
