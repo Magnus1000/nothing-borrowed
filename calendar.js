@@ -47,8 +47,11 @@ const Calendar = () => {
               className={`calendar-option ${slot.status === 'unavailable' ? 'not-available' : ''} ${selectedSlot === slot.id ? 'selected' : ''}`}
               onClick={() => handleSlotClick(slot.id)}
             >
-              <div className="calendar-day-text">{new Date(slot.date_time).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' })}</div>
-              <div className="calendar-amount-text">30 mins</div>
+                <div className="calendar-date-time-div">
+                    <div className="calendar-day-text">{new Date(slot.date_time).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' })}</div>
+                    <div className="calendar-time-text">{new Date(slot.date_time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}</div>
+                </div>
+                <div className="calendar-amount-text">30 mins</div>
             </div>
           ))}
         </div>
