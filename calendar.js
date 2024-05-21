@@ -28,7 +28,7 @@ const Calendar = () => {
             if (bookingInfo) {
             const date = new Date(slot.date_time);
             const dateString = date.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' });
-            const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }) + (isDaylightSavings(date) ? ' EST' : ' EDT');
+            const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }) + ' ET';
             bookingInfo.value = `${dateString}, ${timeString}`;
             }
 
