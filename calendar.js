@@ -66,6 +66,7 @@ const Calendar = () => {
               <div className="calendar-time-text">
                 {new Date(slot.date_time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }) + ' ET'}
               </div>
+              {slot.status === 'unavailable' && <div className="unavailable-text">unavailable</div>}
             </div>
             <div className="calendar-amount-text">30 mins</div>
           </div>
