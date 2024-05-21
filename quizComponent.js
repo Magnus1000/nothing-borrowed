@@ -160,18 +160,22 @@ const ResultsComponent = ({ correctAnswers, onRestart }) => {
   const handleCheckoutRedirect = () => {
     const buyNowButton = document.getElementById('buyNow');
     if (buyNowButton) {
+      console.log('Found buy now button');
       buyNowButton.click();
     }
   };
 
 
-  const handleButtonClick = () => {
-    if (scorePercentage === 100) {
-      handleCheckoutRedirect();
-    } else {
-      onRestart();
-    }
-  };
+const handleButtonClick = () => {
+  console.log('handleButtonClick called');
+  if (scorePercentage === 100) {
+    console.log('Redirecting to checkout');
+    handleCheckoutRedirect();
+  } else {
+    console.log('Restarting quiz');
+    onRestart();
+  }
+};
 
   return (
     <div className={`results-component ${transitionClass}`}>
