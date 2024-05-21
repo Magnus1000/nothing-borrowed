@@ -58,7 +58,7 @@ const Calendar = () => {
           <div
             key={slot.id}
             id={slot.id}
-            className={`calendar-option ${slot.status === 'unavailable' ? 'not-available' : ''} ${selectedSlot === slot.id ? 'selected' : ''}`}
+            className={`calendar-option ${slot.status === 'unavailable' ? 'unavailable' : ''} ${selectedSlot === slot.id ? 'selected' : ''}`}
             onClick={() => handleSlotClick(slot.id)}
           >
             <div className="calendar-date-time-div">
