@@ -17,7 +17,18 @@ const Calendar = () => {
     }, []);
   
     const handleSlotClick = (id) => {
-      setSelectedSlot(id);
+        setSelectedSlot(id);
+        
+        // Find the slot with the matching id
+        const slot = slots.find(slot => slot.id === id);
+        
+        // Update the textarea field with the selected slot's date_time
+        if (slot) {
+            const bookingInfo = document.getElementById('bookingInfo');
+            if (bookingInfo) {
+            bookingInfo.value = new Date(slot.date_time).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' });
+            }
+        }
     };
   
     return (
