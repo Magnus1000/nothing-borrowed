@@ -5,7 +5,7 @@ const Calendar = () => {
     React.useEffect(() => {
       const fetchSlots = async () => {
         try {
-          const response = await fetch('/api/getCalendarSlots');
+          const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/nothingborrowedFetchSlots.js');
           const data = await response.json();
           setSlots(data);
         } catch (error) {
