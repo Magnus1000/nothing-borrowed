@@ -49,7 +49,9 @@ const Calendar = () => {
             >
                 <div className="calendar-date-time-div">
                     <div className="calendar-day-text">{new Date(slot.date_time).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' })}</div>
-                    <div className="calendar-time-text">{new Date(slot.date_time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })}</div>
+                <div className="calendar-time-text">
+                {new Date(slot.date_time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }) + ' ET'}
+                </div>
                 </div>
                 <div className="calendar-amount-text">30 mins</div>
             </div>
