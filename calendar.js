@@ -26,7 +26,10 @@ const Calendar = () => {
         if (slot) {
             const bookingInfo = document.getElementById('bookingInfo');
             if (bookingInfo) {
-            bookingInfo.value = new Date(slot.date_time).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' });
+            const date = new Date(slot.date_time);
+            const dateString = date.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' });
+            const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }) + (isDaylightSavings(date) ? ' EST' : ' EDT');
+            bookingInfo.value = `${dateString}, ${timeString}`;
             }
 
             // Update the field with id = recordId with the id of the selected slot
