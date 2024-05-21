@@ -157,9 +157,17 @@ const ResultsComponent = ({ correctAnswers, onRestart }) => {
     buttonLink = null;
   }
 
+  const handleCheckoutRedirect = () => {
+    const buyNowButton = document.getElementById('buyNow');
+    if (buyNowButton) {
+      buyNowButton.click();
+    }
+  };
+
+
   const handleButtonClick = () => {
-    if (buttonLink) {
-      window.location.href = buttonLink;
+    if (scorePercentage === 100) {
+      handleCheckoutRedirect();
     } else {
       onRestart();
     }
