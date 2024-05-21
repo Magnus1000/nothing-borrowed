@@ -28,14 +28,24 @@ const Calendar = () => {
   const handleSlotClick = (id) => {
     setSelectedSlot(id);
 
+    // Find the slot with the matching id
     const slot = slots.find(slot => slot.id === id);
 
+    // Update the textarea field with the selected slot's date_time
     if (slot) {
-      const date = new Date(slot.date_time);
-      const dateString = date.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' });
-      const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }) + ' ET';
-      setBookingInfo(`${dateString}, ${timeString}`);
-      setRecordId(slot.id);
+        const bookingInfo = document.getElementById('bookingInfo');
+    if (bookingInfo) {
+        const date = new Date(slot.date_time);
+        const dateString = date.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' });
+        const timeString = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }) + ' ET';
+        bookingInfo.value = `${dateString}, ${timeString}`;
+    }
+
+    // Update the field with id = recordId with the id of the selected slot
+    const recordIdField = document.getElementById('recordId');
+        if (recordIdField) {
+        recordIdField.value = slot.id;
+        }
     }
   };
 
