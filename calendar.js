@@ -1,19 +1,24 @@
 const Calendar = () => {
     const [slots, setSlots] = React.useState([]);
     const [selectedSlot, setSelectedSlot] = React.useState(null);
+    const [isLoading, setIsLoading] = React.useState(true);   
   
     React.useEffect(() => {
-      const fetchSlots = async () => {
-        try {
-          const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/nothingborrowedFetchSlots.js');
-          const data = await response.json();
-          setSlots(data);
-        } catch (error) {
-          console.error('Error fetching slots:', error);
-        }
-      };
-  
-      fetchSlots();
+        const fetchSlots = async () => {
+          try {
+            const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/nothingborrowedFetchSlots.js');
+            const data = await response.json();
+            setSlots(data);
+          } catch (error) {
+            console.error('Error fetching slots:', error);
+          } finally {
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 2000); // wait for 2 seconds before setting isLoading to false
+          }
+        };
+    
+        fetchSlots();
     }, []);
   
     const handleSlotClick = (id) => {
@@ -39,6 +44,14 @@ const Calendar = () => {
             }
         }
     };
+
+    if (isLoading) {
+        return (
+          <div className="calendar-loading-div">
+            <div className="calendar-loading-text">loading calendar...</div>
+          </div>
+        );
+    }
   
     return (
       <div className="calendar-row">
