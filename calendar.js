@@ -28,6 +28,12 @@ const Calendar = () => {
             if (bookingInfo) {
             bookingInfo.value = new Date(slot.date_time).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' });
             }
+
+            // Update the field with id = recordId with the id of the selected slot
+            const recordIdField = document.getElementById('recordId');
+            if (recordIdField) {
+            recordIdField.value = slot.id;
+            }
         }
     };
   
