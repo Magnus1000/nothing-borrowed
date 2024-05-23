@@ -63,25 +63,29 @@ const Calendar = () => {
 
   return (
     <div className="calendar-row">
-      <div className="calendar-div">
-        {slots.map((slot) => (
-          <div
-            key={slot.id}
-            id={slot.id}
-            className={`calendar-option ${slot.status === 'unavailable' ? 'unavailable' : ''} ${selectedSlot === slot.id ? 'selected' : ''}`}
-            onClick={() => handleSlotClick(slot.id)}
-          >
-            <div className="calendar-date-time-div">
-              <div className="calendar-day-text">{new Date(slot.date_time).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' })}</div>
-              <div className="calendar-time-text">
-                {new Date(slot.date_time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }) + ' ET'}
-              </div>
+        <div className="calendar-header-row">
+            <h1 className="calendar-header">{new Date().toLocaleString('default', { month: 'long' })}</h1>
+            <h2 className="calendar-subheader">New dates will be released on the first of every month</h2>
+        </div>
+        <div className="calendar-div">
+            {slots.map((slot) => (
+            <div
+                key={slot.id}
+                id={slot.id}
+                className={`calendar-option ${slot.status === 'unavailable' ? 'unavailable' : ''} ${selectedSlot === slot.id ? 'selected' : ''}`}
+                onClick={() => handleSlotClick(slot.id)}
+            >
+                <div className="calendar-date-time-div">
+                <div className="calendar-day-text">{new Date(slot.date_time).toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' })}</div>
+                <div className="calendar-time-text">
+                    {new Date(slot.date_time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }) + ' ET'}
+                </div>
+                </div>
+                <div className="calendar-amount-text">30 mins</div>
+                {slot.status === 'unavailable' && <div className="unavailable-text">unavailable</div>}
             </div>
-            <div className="calendar-amount-text">30 mins</div>
-            {slot.status === 'unavailable' && <div className="unavailable-text">unavailable</div>}
-          </div>
-        ))}
-      </div>
+            ))}
+        </div>
     </div>
   );
 };
