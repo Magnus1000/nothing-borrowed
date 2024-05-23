@@ -65,7 +65,7 @@ const Calendar = () => {
     <div className="calendar-row">
         <div className="calendar-header-row">
             <h1 className="calendar-header">{new Date().toLocaleString('default', { month: 'long' })}</h1>
-            <h2 className="calendar-subheader">New dates will be released on the first of every month</h2>
+            <h2 className="calendar-subheader">New times will be released on the first day of every month</h2>
         </div>
         <div className="calendar-div">
             {slots.map((slot) => (
