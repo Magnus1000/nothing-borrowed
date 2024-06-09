@@ -90,4 +90,4 @@ const Calendar = () => {
   );
 };
 
-ReactDOM.render(<LocationService />, document.getElementById('locationService'));
+ReactDOM.render(React.createElement(Calendar), document.getElementById('root'));
